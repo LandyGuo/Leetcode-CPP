@@ -41,34 +41,34 @@ Can you do it in O(n) time and/or in-place with O(1) extra space?
 
 class Solution {
 public:
-    void wiggleSort(vector<int>& nums) {
-        vector<int> m_nums = nums;
-        //find median
-        int median = -1;
+ void wiggleSort(vector<int>& nums) {
+	    vector<int> m_nums = nums;
+	    //find median
+	    int median = -1;
 	    if (nums.size() % 2 == 0)
 		    median = (findKthElem(nums, nums.size() / 2) + findKthElem(nums, nums.size() / 2 + 1)) / 2;
 	    else
 		    median = findKthElem(nums, (nums.size() + 1) / 2);
-		  //index rewriting
-		  #define A(i)  (nums[(2*(i)+1)%(nums.size()|1)])
-		  //three-way sort
-		  int i=0,j=0,k=nums.size()-1;
-		  while(j<=k)
-		  {
-		    if(A(j)>median)//j往前行进的条件是A(j)>median 或 A(j)=median;j之前都>=median
-		    {
-		        swap(A(i),A(j));
-		        i++,j++;
-		    }
-		    else if(A(j)<median)//k往后行进的条件是:A(j)<median,k之后都<median
-		    {
-		        swap(A(j),A(k));
-		        k--;
-		    }
-	        else
-	            j++;
-		  }
-    }
+		//index rewriting
+		#define A(i)  (nums[(2*(i)+1)%(nums.size()|1)])
+		//three-way sort
+		int i=0,j=0,k=nums.size()-1;
+		while(j<=k)
+		{
+			if(A(j)>median)//j往前行进的条件是A(j)>median 或 A(j)=median;j之前都>=median
+			{
+				swap(A(i),A(j));
+				i++,j++;
+			}
+			else if(A(j)<median)//k往后行进的条件是:A(j)<median,k之后都<median
+			{
+				swap(A(j),A(k));
+				k--;
+			}
+			else
+				j++;
+		}
+ }
     
     int findKthElem(vector<int> const &nums,int k)
     {
